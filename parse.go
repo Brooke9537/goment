@@ -20,6 +20,7 @@ var secondIdx = 5
 var nanosecondIdx = 6
 var weekIdx = 7
 var weekdayIdx = 8
+var millisecondIdx = 9
 
 var isoDates = []isoDateFormat{
 	// createISOFormat("+002006-01-02", `\+\d{6}-\d\d-\d\d`),
@@ -140,6 +141,8 @@ func loadParseReplacements() {
 	addParseReplacement([]string{"k", "kk"}, handleOneToTwentyFourTime, regexps.MatchOneToTwo)
 	addParseReplacement([]string{"m", "mm"}, minuteIdx, regexps.MatchOneToTwo)
 	addParseReplacement([]string{"s", "ss"}, secondIdx, regexps.MatchOneToTwo)
+	addParseReplacement([]string{"S", "SS", "SSS"}, millisecondIdx, regexps.MatchOneToThree)
+	addParseReplacement([]string{"SSSS"}, nanosecondIdx, regexps.MatchNine)
 	addParseReplacement([]string{"a", "A"}, handleMeridiem, regexps.MatchMeridiem)
 
 	addParseReplacement([]string{"Z", "ZZ"}, handleOffset, regexps.MatchShortOffset)
@@ -451,6 +454,10 @@ func buildFromParseConfig(config *parseConfig) (*Goment, error) {
 		}
 	}
 
+	// if got millisecondIdx, then make it to nanosecondIdx
+	if keyExists(millisecondIdx, config.parsedArray) && !keyExists(nanosecondIdx, config.parsedArray) {
+		config.parsedArray[nanosecondIdx] = config.parsedArray[millisecondIdx] * 1000000
+	}
 	// Zero out any values that weren't default, including time.
 	// If its month or day, set the value to 1.
 	for i := 0; i < 7; i++ {
