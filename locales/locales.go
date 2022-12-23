@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nleeper/goment/regexps"
+	"github.com/Brooke9537/goment/regexps"
 )
 
 type ordinalFunction func(int, string) string
