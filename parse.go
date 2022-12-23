@@ -142,7 +142,7 @@ func loadParseReplacements() {
 	addParseReplacement([]string{"m", "mm"}, minuteIdx, regexps.MatchOneToTwo)
 	addParseReplacement([]string{"s", "ss"}, secondIdx, regexps.MatchOneToTwo)
 	addParseReplacement([]string{"S", "SS", "SSS"}, millisecondIdx, regexps.MatchOneToThree)
-	addParseReplacement([]string{"SSSS"}, nanosecondIdx, regexps.MatchNine)
+	addParseReplacement([]string{"SSSS"}, nanosecondIdx, regexps.MatchOneToNine)
 	addParseReplacement([]string{"a", "A"}, handleMeridiem, regexps.MatchMeridiem)
 
 	addParseReplacement([]string{"Z", "ZZ"}, handleOffset, regexps.MatchShortOffset)

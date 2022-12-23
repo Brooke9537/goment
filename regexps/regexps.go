@@ -48,8 +48,8 @@ var MatchOneToThree = regexp.MustCompile(`\d{1,3}`)
 // MatchThree is used to match exactly 3 digits.
 var MatchThree = regexp.MustCompile(`\d{3}`)
 
-// MatchNine is used to match nanosecond
-var MatchNine = regexp.MustCompile(`\d{9}`)
+// MatchOneToNine is used to match nanosecond
+var MatchOneToNine = regexp.MustCompile(`\d{1,9}`)
 
 // MatchMeridiem is used to match meridiem field.
 var MatchMeridiem = regexp.MustCompile(`(?i)(am|pm)`)
